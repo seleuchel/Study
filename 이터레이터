@@ -1,0 +1,14 @@
+이터레이터 : 반복가능한 객체
+
+python 
+ex.
+code
+  it = [1,2,3].__iter__()
+  it.__next__()
+  it.__next__()
+  it.__next__()
+ result
+  1
+  2
+  3
+  
