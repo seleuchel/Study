@@ -12,3 +12,51 @@ code
   2
   3
   
+  안의 내용을 다 호출하면 이후 __next__는 StopIteration 예외 발생
+  파이썬에서는 다양한 자료형(딕셔너리, 튜플, 문자열, 리스트 등)에서 이터레이터 제공.
+  
+  반복 가능한 객체 : 한 번에 요소 하나씩을 가져올 수 있는 개체
+  이터레이터 : __next__ 메소드를 사용해서 차례대로 값을 꺼낼 수 있는 객체
+  
+  Q. 시퀀스 객체 vs 반복 가능한 객체
+  A. 반복 가능한 객체 내에 시퀀스 객체가 존재
+      ㄴ 요소의 순서가 정해져있고 연속적으로 이어져 있어야함.
+      딕셔너리, 세트는 시퀀스 아님.
+  
+  이터레이터 만들기
+  
+  for i in [1,2,3].__iter__():
+    print(i)
+    
+    이런식으로 작성할 수도 있다.
+    
+    class 이터레이터:
+      def __iter__(self):
+        코드
+      def __next__(self):
+         코드 // 값의 출력과 StopIteration 예외 발생을 담당.
+    새로운 객체에 __iter__ 와 __next__ 함수를 추가해서 이터레이터를 생성시킬 수도 있다.
+    
+    인덱스로 접근하고 싶다면
+    __getitem__ 메소드를 추가한다.
+    ex.
+      class Num:
+        def __init__(self, stop):
+          self.stop = stop
+        def __getitem__(self, index):
+          if index < self.stop:
+            return index
+          else:
+            raise IndexError
+       
+      호출 : print(Num(3)[0], Num(3)[1], Num(3)[2])
+      
+    
+  이터레이터 언패킹
+    it = [1,2,3].__iter__()
+    a,b,c = it
+    print(a,b,c)
+    --> 1 2 3
+    
+    
+    ** return _  <- 반환값을 사용하지 않겠다.
